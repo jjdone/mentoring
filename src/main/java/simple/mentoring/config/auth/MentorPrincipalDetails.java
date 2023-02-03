@@ -3,12 +3,18 @@ package simple.mentoring.config.auth;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import simple.mentoring.domain.Mentor;
 
 import java.util.Collection;
 
 @Data
-public class PrincipalDetails implements UserDetails {
+public class MentorPrincipalDetails implements UserDetails {
 
+    private Mentor mentor;
+
+    public MentorPrincipalDetails(Mentor mentor) {
+        this.mentor = mentor;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -17,31 +23,31 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return mentor.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return mentor.getEmail();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

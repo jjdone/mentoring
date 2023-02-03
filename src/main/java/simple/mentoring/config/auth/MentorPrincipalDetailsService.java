@@ -23,6 +23,5 @@ public class MentorPrincipalDetailsService implements UserDetailsService {
         } else {
             return new MentorPrincipalDetails(mentor);
         }
-        return null;
     }
 }
