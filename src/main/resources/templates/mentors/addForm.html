@@ -2,6 +2,31 @@
 <html xmlns:th="http://www.thyemleaf.org">
 <head th:replace="fragments/header :: header">
     <meta charset="UTF-8">
+    <style>
+        #btn_signup {
+            width: 270px;
+            height: 30px;
+            margin: 13px auto;
+            background-color: #0095f6;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        #btn_signup:disabled {
+            background-color: #B9DFFC;
+        }
+        #btn_signup:disabled:hover {
+            cursor: default;
+        }
+        #btn_signup:enabled:hover {
+            cursor: pointer;
+        }
+        #btn_signup:focus {
+            outline: none;
+        }
+    </style>
     <title>멘토 회원 가입</title>
 </head>
 <body>
@@ -15,7 +40,8 @@
             <li><input type="text" name="phone" placeholder="전화번호" required="required" /></li>
             <li><input type="text" name="name" placeholder="성명" required="required" /></li>
         </ul>
-        <button disabled>가입</button>
+<!--        <button id="btn_signup" disabled type="submit">가입</button>-->
+        <input type="submit" value="가입">
     </form>
     <span th:if="${param.error}">이메일 계정이 이미 존재합니다.</span>
     <a th:href="@{/mentors/login}">계정이 있으신가요?  로그인</a>
