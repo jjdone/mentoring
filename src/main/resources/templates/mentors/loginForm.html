@@ -1,28 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transfo">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Instagram</title>
-    <link href="/style/common.css" rel="stylesheet" type="text/css" />
-    <link href="/style/login.css" rel="stylesheet" type="text/css" />
-
-    <!-- favicon -->
-    <link rel="icon" href="/img/favicon.png">
-    <link rel="instagram-icon" href="/img/favicon.png">
-
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta charset="UTF-8">
+    <title> 멘토 로그인</title>
 </head>
 <body>
-<div class="container">
-    <form action="/loginForm" method="post">
-        <img class="logo_instagram" src="/img/logo_text.png" alt="instagram_logo">
-        <input type="text" class="username" name="username" id="username" placeholder="이메일">
-        <input type="password" class="password" name="password" id="password" placeholder="비밀번호">
-        <button id="btn_login" disabled>로그인</button>
-    </form>
-    <span class="login_input_check" th:if="${param.error}" > 입력한 계정을 찾을 수 없습니다. </span>
-    <a href="/signup" class="button_signup">계정이 없으신가요? 가입하기</a>
-</div>
-<script src="/js/login.js"></script>
+    <div>
+        <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+        <form action="/loginForm" method="post">
+            <ul>
+                <li><input type="text" name="username" placeholder="이메일"></li>
+                <li><input type="password" name="password" placeholder="비밀번호"></li>
+            </ul>
+            <button disabled>로그인</button>
+        </form>
+        <span th:if="${param.error}" > 입력한 계정을 찾을 수 없습니다. </span>
+        <a th:href="@{/mentors/add}">계정이 없으신가요? 가입하기</a>
+
+        <div th:replace="fragments/footer :: footer" />
+
+    </div>
 </body>
 </html>

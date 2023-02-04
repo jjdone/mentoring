@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html xmlns:th="http://www.thyemleaf.org">
+<head th:replace="fragments/header :: header">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>멘토 회원 가입</title>
 </head>
 <body>
+<div>
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
 
+    <form th:action method="post">
+        <ul>
+            <li><input type="email" name="email" placeholder="이메일 주소" required="required" maxlength="30"/></li>
+            <li><input type="password" name="password" placeholder="비밀번호" required="required" /></li>
+            <li><input type="text" name="phone" placeholder="전화번호" required="required" /></li>
+            <li><input type="text" name="name" placeholder="성명" required="required" /></li>
+        </ul>
+        <button disabled>가입</button>
+    </form>
+    <span th:if="${param.error}">이메일 계정이 이미 존재합니다.</span>
+    <a th:href="@{/mentors/login}">계정이 있으신가요?  로그인</a>
+
+    <div th:replace="fragments/footer :: footer" />
+
+</div>
 </body>
 </html>
