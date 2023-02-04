@@ -10,11 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import simple.mentoring.config.auth.MentorPrincipalDetailsService;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final MentorPrincipalDetailsService mentorPrincipalDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -29,7 +32,15 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
-
+        http.authorizeRequests()
+                .antMatchers("/", "/mentors/**").permitAll()
+                .anyRequest().authenticated()
+            .and()
+                .formLogin()
+                .loginPage("/mentors/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/");
+        System.out.println("SecurityConfig.filterChain");
         return http.build();
     }
 }
