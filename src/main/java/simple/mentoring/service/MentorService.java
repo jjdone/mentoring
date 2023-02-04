@@ -16,12 +16,16 @@ public class MentorService {
 
     @Transactional
     public Long join(Mentor mentor) {
-        if (mentorRepository.findByEmail(mentor.getEmail()) != null) {
-            throw new IllegalStateException("이미 존재하는 멘토입니다.");
-        }
+        validationMentor(mentor);
 
         mentorRepository.save(mentor);
 
         return mentor.getId();
+    }
+
+    private void validationMentor(Mentor mentor) {
+        if (mentorRepository.findByEmail(mentor.getEmail()) != null) {
+            throw new IllegalStateException("이미 존재하는 멘토입니다.");
+        }
     }
 }
