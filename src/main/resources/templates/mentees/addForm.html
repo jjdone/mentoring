@@ -2,6 +2,31 @@
 <html xmlns:th="http://www.thyemleaf.org">
 <head th:replace="fragments/header :: header">
     <meta charset="UTF-8">
+    <style>
+        #btn_signup {
+            width: 270px;
+            height: 30px;
+            margin: 13px auto;
+            background-color: #0095f6;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        #btn_signup:disabled {
+            background-color: #B9DFFC;
+        }
+        #btn_signup:disabled:hover {
+            cursor: default;
+        }
+        #btn_signup:enabled:hover {
+            cursor: pointer;
+        }
+        #btn_signup:focus {
+            outline: none;
+        }
+    </style>
     <title>멘토 회원 가입</title>
 </head>
 <body>
