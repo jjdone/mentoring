@@ -30,7 +30,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain mentorFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/", "/mentors/**").permitAll()
@@ -40,7 +40,20 @@ public class SecurityConfig {
                 .loginPage("/mentors/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/");
-        System.out.println("SecurityConfig.filterChain");
+        return http.build();
+    }
+
+    @Bean
+    protected SecurityFilterChain menteeFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/", "/mentees/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/mentees/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/");
         return http.build();
     }
 }
