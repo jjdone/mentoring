@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simple.mentoring.domain.Mentor;
-import simple.mentoring.dto.MentorSignupDto;
 import simple.mentoring.repository.MentorRepository;
 
 
