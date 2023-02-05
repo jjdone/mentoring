@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 @Data
-public class MentoringAddDto {
+public class MentoringDto {
 
     private String title;
     private String content;
