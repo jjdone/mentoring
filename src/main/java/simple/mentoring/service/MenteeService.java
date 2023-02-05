@@ -21,6 +21,11 @@ public class MenteeService {
         return mentee.getId();
     }
 
+    @Transactional
+    public Mentee findByEmail(String menteeEmail) {
+        return menteeRepository.findByEmail(menteeEmail);
+    }
+
     private void validationMentee(Mentee mentee) {
         if (menteeRepository.findByEmail(mentee.getEmail()) != null) {
             throw new IllegalStateException("이미 존재하는 멘티입니다.");
