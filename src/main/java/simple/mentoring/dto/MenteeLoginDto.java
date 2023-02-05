@@ -1,2 +1,10 @@
-package simple.mentoring.dto;public class MenteeLoginDto {
+package simple.mentoring.dto;
+
+import lombok.Data;
+
+@Data
+public class MenteeLoginDto {
+
+    private String email;
+    private String password;
 }
