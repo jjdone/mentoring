@@ -4,11 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import simple.mentoring.domain.Mentee;
+import simple.mentoring.dto.MenteeLoginDto;
 import simple.mentoring.dto.MenteeSignupDto;
 import simple.mentoring.service.MenteeService;
 
@@ -45,16 +44,21 @@ public class MenteeController {
     }
 
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(Model model) {
         log.info("Mentee Controller: loginForm");
         return "mentees/loginForm";
     }
 
     @PostMapping("/login")
-    public String login(MenteeSignupDto menteeSignupDto) {
+    public String login(@ModelAttribute MenteeLoginDto menteeLoginDto) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         log.info("Mentee Controller: login");
-        if (menteeService.findByEmail(menteeSignupDto.getEmail()) == null) {
+        Mentee mentee = menteeService.findByEmail(menteeLoginDto.getEmail());
+        if (mentee == null) {
             throw new IllegalStateException("존재하지 않는 멘티입니다.");
+        }
+        if (!encoder.matches(menteeLoginDto.getPassword(), mentee.getPassword())) {
+            throw new IllegalStateException("비밀번호를 틀렸습니다.");
         }
         return "redirect:/mentorings";
     }
