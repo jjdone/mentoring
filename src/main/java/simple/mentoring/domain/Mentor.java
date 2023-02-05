@@ -4,10 +4,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +27,9 @@ public class Mentor {
     private String name;
     private String phone;
     private double rating;
+
+    @OneToMany(mappedBy = "mentor", cascade = CascadeType.ALL)
+    private List<Mentoring> mentorings = new ArrayList<>();
 
     @Builder
     public Mentor(String email, String password, String name, String phone, double rating) {

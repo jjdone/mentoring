@@ -1,6 +1,8 @@
 package simple.mentoring.domain;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -10,6 +12,7 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Mentoring {
 
     @Id @GeneratedValue
@@ -27,4 +30,17 @@ public class Mentoring {
     private String title;
     private String content;
     private LocalDateTime createDate;
+
+    public void setMentor(Mentor mentor) {
+        this.mentor = mentor;
+        mentor.getMentorings().add(this);
+    }
+
+    @Builder
+    public Mentoring(Mentee mentee, String title, String content, LocalDateTime createDate) {
+        this.mentee = mentee;
+        this.title = title;
+        this.content = content;
+        this.createDate = createDate;
+    }
 }
