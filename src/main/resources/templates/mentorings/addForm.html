@@ -20,8 +20,9 @@
             <label th:for="email">작성자 이메일</label>
             <input type="email" th:field="*{email}" class="form-control" placeholder="작성자 이메일을 입력하세요">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">제출</button>
     </form>
+    <a th:href="@{/mentorings}">목록으로</a>
     <br/>
     <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
