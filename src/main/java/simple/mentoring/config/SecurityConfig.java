@@ -34,13 +34,13 @@ public class SecurityConfig {
     protected SecurityFilterChain FilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/", "/mentors/**").permitAll()
+                .antMatchers("/", "/mentors/**", "/mentees/**", "/mentorings/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/mentors/login")
                 .loginProcessingUrl("/mentorLogin")
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/mentorings/add");
 
         return http.build();
     }
