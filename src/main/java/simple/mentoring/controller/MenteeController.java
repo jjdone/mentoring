@@ -45,8 +45,17 @@ public class MenteeController {
     }
 
     @GetMapping("/login")
-    public String login() {
-        log.info("Mentee Controller: login");
+    public String loginForm() {
+        log.info("Mentee Controller: loginForm");
         return "mentees/loginForm";
+    }
+
+    @PostMapping("/login")
+    public String login(MenteeSignupDto menteeSignupDto) {
+        log.info("Mentee Controller: login");
+        if (menteeService.findByEmail(menteeSignupDto.getEmail()) == null) {
+            throw new IllegalStateException("존재하지 않는 멘티입니다.");
+        }
+        return "redirect:/mentorings";
     }
 }
