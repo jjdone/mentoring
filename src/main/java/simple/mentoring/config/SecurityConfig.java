@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/mentors/login")
                 .loginProcessingUrl("/mentorLogin")
-                .defaultSuccessUrl("/mentorings/add");
+                .defaultSuccessUrl("/mentorings");
 
         return http.build();
     }
