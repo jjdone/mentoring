@@ -1,9 +1,10 @@
 package simple.mentoring.dto;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 
-@Getter
+@Data
+@Builder
 public class MenteeSignupDto {
 
     private String email;
