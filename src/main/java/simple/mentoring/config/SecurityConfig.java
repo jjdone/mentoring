@@ -19,8 +19,9 @@ public class SecurityConfig {
 
     private final MentorPrincipalDetailsService mentorPrincipalDetailsService;
 
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -30,30 +31,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    protected SecurityFilterChain mentorFilterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain FilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/", "/mentors/**").permitAll()
                 .anyRequest().authenticated()
-            .and()
-                .formLogin()
-                .loginPage("/mentors/login")
-                .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/");
-        return http.build();
-    }
-
-    @Bean
-    protected SecurityFilterChain menteeFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        http.authorizeRequests()
-                .antMatchers("/", "/mentees/**").permitAll()
-                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/mentees/login")
-                .loginProcessingUrl("/login")
+                .loginPage("/mentors/login")
+                .loginProcessingUrl("/mentorLogin")
                 .defaultSuccessUrl("/");
+
         return http.build();
     }
 }
