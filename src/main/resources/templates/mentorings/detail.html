@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>멘토링 등록</title>
 </head>
 <body>
-$END$
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <h3 th:text="${form.title}" />
+    <p th:text="${form.content}" />
+    <div>
+        <p th:text="${form.email}">연락처</p>
+    </div>
+    <div>
+        <a th:href="@{/mentorings}">목록으로</a>
+    </div>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
 </body>
 </html>

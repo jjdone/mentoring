@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thyemleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>멘토링 목록</title>
 </head>
 <body>
-$END$
+<div>
+  <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+  <div>
+    <a href="/" th:href="@{/mentorings/add}" class="btn btn-primary" role="button">등록</a>
+    <table>
+      <thead> <tr>
+        <th>번호</th> <th>제목</th> <th>멘토 이름</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="mentoring : ${mentorings}">
+        <td th:text="${mentoring.id}"></td>
+        <td th:text="${mentoring.title}"></td>
+        <td th:text="${mentoring.mentor.name}"></td>
+        <td>
+            <a href="#" th:href="@{/mentorings/{id} (id=${mentoring.id})}" class="btn btn-primary" role="button">상세보기</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div th:replace="fragments/footer :: footer"/>
+</div>
 </body>
 </html>
